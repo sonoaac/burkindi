@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Burkindi Restaurant – Order Pickup</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <div class="header__logo">
+        <img src="client/img/logo.png" alt="Burkindi Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <span class="logo-fallback">BURKINDI</span>
+      </div>
+      <nav class="header__nav">
+        <a href="#about">About</a>
+        <a href="tel:9737323310" class="header__call">📞 Call</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── HERO BANNER (shorter, like DoorDash restaurant header) ── -->
+  <section class="hero">
+    <div class="hero__img-wrap">
+      <img src="client/img/frontstore.png" alt="Burkindi Restaurant" class="hero__img" onerror="this.style.opacity='0'" />
+      <div class="hero__scrim"></div>
+    </div>
+  </section>
+
+  <!-- ── RESTAURANT INFO CARD (below banner, like DoorDash) ── -->
+  <div class="resto-card">
+    <div class="resto-card__inner">
+      <div class="resto-card__top">
+        <div>
+          <h1 class="resto-card__name">Burkindi Restaurant</h1>
+          <p class="resto-card__cuisine">West African · Grilled Meat · Pickup</p>
+        </div>
+        <div class="resto-card__badge">Open</div>
+      </div>
+      <div class="resto-card__stats">
+        <div class="stat">
+          <span class="stat__icon">⭐</span>
+          <span class="stat__val">4.8</span>
+          <span class="stat__label">1K+ ratings</span>
+        </div>
+        <div class="stat__divider"></div>
+        <div class="stat">
+          <span class="stat__icon">🏃</span>
+          <span class="stat__val">Pickup</span>
+          <span class="stat__label">only</span>
+        </div>
+        <div class="stat__divider"></div>
+        <div class="stat">
+          <span class="stat__icon">📍</span>
+          <span class="stat__val">Newark</span>
+          <span class="stat__label">NJ 07108</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MENU ── -->
+  <section class="menu" id="menu">
+
+    <!-- Sticky category tabs -->
+    <div class="category-tabs" id="categoryTabs">
+      <button class="tab active" data-cat="all">All</button>
+      <button class="tab" data-cat="dibi">🥩 Dibi</button>
+      <button class="tab" data-cat="poissons">🐟 Poissons</button>
+      <button class="tab" data-cat="pintade">🐔 Pintade</button>
+      <button class="tab" data-cat="sauces">🥘 Sauces</button>
+      <button class="tab" data-cat="traditional">🌿 Traditional</button>
+      <button class="tab" data-cat="sides">🍚 Sides</button>
+      <button class="tab" data-cat="drinks">🥤 Drinks</button>
+    </div>
+
+    <div class="menu__grid" id="menuGrid">
+
+      <!-- ── DIBI ── -->
+      <div class="cat-label" data-cat-label="dibi">Dibi — Grilled Meat</div>
+
+      <div class="menu-card" data-cat="dibi">
+        <div class="menu-card__body">
+          <div class="menu-card__badge">★ #1 Most Liked</div>
+          <h3>Dibi with Riz Gras</h3>
+          <p>Grilled meat with jollof rice. The customer favorite.</p>
+          <div class="menu-card__footer">
+            <span class="price">$37.00</span>
+            <button class="add-btn" onclick="addToCart('Dibi with Riz Gras (Jollof Rice)', 37.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/dibi-rizgras.png" alt="Dibi with Riz Gras" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🥩</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="dibi">
+        <div class="menu-card__body">
+          <h3>Dibi with Attieke</h3>
+          <p>Grilled meat with cassava couscous (attiéké).</p>
+          <div class="menu-card__footer">
+            <span class="price">$37.00</span>
+            <button class="add-btn" onclick="addToCart('Dibi with Attieke (Kassava)', 37.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/dibi-attieke.png" alt="Dibi with Attieke" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🥩</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="dibi">
+        <div class="menu-card__body">
+          <div class="menu-card__badge">★ #3 Most Liked</div>
+          <h3>Dibi with Alloco</h3>
+          <p>Grilled meat with sweet fried plantains.</p>
+          <div class="menu-card__footer">
+            <span class="price">$37.00</span>
+            <button class="add-btn" onclick="addToCart('Dibi with Alloco (Plantain)', 37.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/dibi-alloco.png" alt="Dibi with Alloco" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🥩</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="dibi">
+        <div class="menu-card__body">
+          <h3>Dibi with Waki</h3>
+          <p>Grilled meat served with seasoned beans.</p>
+          <div class="menu-card__footer">
+            <span class="price">$37.00</span>
+            <button class="add-btn" onclick="addToCart('Dibi with Waki (Beans)', 37.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/dibi-waki.png" alt="Dibi with Waki" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🥩</div>
+        </div>
+      </div>
+
+      <!-- ── POISSONS ── -->
+      <div class="cat-label" data-cat-label="poissons">Poissons — Fish</div>
+
+      <div class="menu-card" data-cat="poissons">
+        <div class="menu-card__body">
+          <h3>Poissons Simple (Fry)</h3>
+          <p>Whole fried fish, seasoned and served with dipping sauce.</p>
+          <div class="menu-card__footer">
+            <span class="price">$25.00</span>
+            <button class="add-btn" onclick="addToCart('Poissons Simple (Fry)', 25.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/poissons-simple.png" alt="Poissons Simple" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🐟</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="poissons">
+        <div class="menu-card__body">
+          <div class="menu-card__badge">★ #2 Most Liked</div>
+          <h3>Poissons with Attieke</h3>
+          <p>Fried fish with cassava couscous (attiéké).</p>
+          <div class="menu-card__footer">
+            <span class="price">$35.00</span>
+            <button class="add-btn" onclick="addToCart('Poissons with Attieke (Kassava)', 35.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/poissons-attieke.png" alt="Poissons with Attieke" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🐟</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="poissons">
+        <div class="menu-card__body">
+          <h3>Poissons with Alloco</h3>
+          <p>Fried fish with sweet fried plantains.</p>
+          <div class="menu-card__footer">
+            <span class="price">$35.00</span>
+            <button class="add-btn" onclick="addToCart('Poissons with Alloco (Plantain)', 35.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/poissons-alloco.png" alt="Poissons with Alloco" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🐟</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="poissons">
+        <div class="menu-card__body">
+          <h3>Poissons with Riz Gras</h3>
+          <p>Fried fish over jollof rice — rich and filling.</p>
+          <div class="menu-card__footer">
+            <span class="price">$35.00</span>
+            <button class="add-btn" onclick="addToCart('Poissons with Riz Gras (Jollof Rice)', 35.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/poissons-rizgras.png" alt="Poissons with Riz Gras" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🐟</div>
+        </div>
+      </div>
+
+      <!-- ── PINTADE ── -->
+      <div class="cat-label" data-cat-label="pintade">Pintade — Guinea Fowl &amp; Chicken</div>
+
+      <div class="menu-card" data-cat="pintade">
+        <div class="menu-card__body">
+          <h3>Pintade Simple</h3>
+          <p>Roasted guinea fowl, served plain with sauce.</p>
+          <div class="menu-card__footer">
+            <span class="price">$27.00</span>
+            <button class="add-btn" onclick="addToCart('Pintade Simple', 27.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/pintade-simple.png" alt="Pintade Simple" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🐔</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="pintade">
+        <div class="menu-card__body">
+          <h3>Pintade Attieke</h3>
+          <p>Guinea fowl with cassava couscous (attiéké).</p>
+          <div class="menu-card__footer">
+            <span class="price">$35.00</span>
+            <button class="add-btn" onclick="addToCart('Pintade Attieke (Kassava)', 35.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/pintade-attieke.png" alt="Pintade Attieke" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🐔</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="pintade">
+        <div class="menu-card__body">
+          <h3>Pintade Alloco</h3>
+          <p>Guinea fowl with sweet fried plantains.</p>
+          <div class="menu-card__footer">
+            <span class="price">$35.00</span>
+            <button class="add-btn" onclick="addToCart('Pintade Alloco (Plantain)', 35.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/pintade-alloco.png" alt="Pintade Alloco" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🐔</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="pintade">
+        <div class="menu-card__body">
+          <h3>Poulet Grillé</h3>
+          <p>Grilled chicken, Burkindi style — charred and fragrant.</p>
+          <div class="menu-card__footer">
+            <span class="price">$35.00</span>
+            <button class="add-btn" onclick="addToCart('Poulet Grillé', 35.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/poulet-grille.png" alt="Poulet Grille" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🐔</div>
+        </div>
+      </div>
+
+      <!-- ── SAUCES ── -->
+      <div class="cat-label" data-cat-label="sauces">Sauces</div>
+
+      <div class="menu-card" data-cat="sauces">
+        <div class="menu-card__body">
+          <h3>Sauce with Feuille</h3>
+          <p>Spinach leaf sauce — rich, earthy, deeply savory.</p>
+          <div class="menu-card__footer">
+            <span class="price">$24.00</span>
+            <button class="add-btn" onclick="addToCart('Sauce with Feuille (Spinach)', 24.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/sauce-feuille.png" alt="Sauce Feuille" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🌿</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="sauces">
+        <div class="menu-card__body">
+          <h3>Sauce with Tomate</h3>
+          <p>Slow-cooked tomato sauce with a bold, spiced base.</p>
+          <div class="menu-card__footer">
+            <span class="price">$24.00</span>
+            <button class="add-btn" onclick="addToCart('Sauce with Tomate (Tomato)', 24.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/sauce-tomate.png" alt="Sauce Tomate" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🍅</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="sauces">
+        <div class="menu-card__body">
+          <h3>Sauce with Gombo</h3>
+          <p>Fresh okra sauce — thick, flavorful, and traditional.</p>
+          <div class="menu-card__footer">
+            <span class="price">$24.00</span>
+            <button class="add-btn" onclick="addToCart('Sauce with Gombo (Fresh Okra)', 24.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/sauce-gombo.png" alt="Sauce Gombo" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🌱</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="sauces">
+        <div class="menu-card__body">
+          <h3>Sauce with Arachide</h3>
+          <p>Peanut butter soup — creamy, rich, and warming.</p>
+          <div class="menu-card__footer">
+            <span class="price">$24.00</span>
+            <button class="add-btn" onclick="addToCart('Sauce with Arachide (Peanut Butter)', 24.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/sauce-arachide.png" alt="Sauce Arachide" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🥜</div>
+        </div>
+      </div>
+
+      <!-- ── TRADITIONAL ── -->
+      <div class="cat-label" data-cat-label="traditional">Traditional Dishes</div>
+
+      <div class="menu-card" data-cat="traditional">
+        <div class="menu-card__body">
+          <h3>Spinach</h3>
+          <p>Classic stewed spinach, served with your choice of starch.</p>
+          <div class="menu-card__footer">
+            <span class="price">$25.00</span>
+            <button class="add-btn" onclick="addToCart('Spinach', 25.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/spinach.png" alt="Spinach" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🥬</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="traditional">
+        <div class="menu-card__body">
+          <h3>Gombo (Fresh Okra)</h3>
+          <p>Fresh okra stew, a beloved West African staple.</p>
+          <div class="menu-card__footer">
+            <span class="price">$25.00</span>
+            <button class="add-btn" onclick="addToCart('Gombo (Fresh Okra)', 25.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/gombo.png" alt="Gombo" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🌱</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="traditional">
+        <div class="menu-card__body">
+          <h3>Arachide (Peanut Butter Stew)</h3>
+          <p>Slow-cooked peanut stew — deep, nutty, and satisfying.</p>
+          <div class="menu-card__footer">
+            <span class="price">$25.00</span>
+            <button class="add-btn" onclick="addToCart('Arachide (Peanut Butter Stew)', 25.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/arachide.png" alt="Arachide" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🥜</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="traditional">
+        <div class="menu-card__body">
+          <h3>Tô with Gombo</h3>
+          <p>Traditional tô (corn porridge) with fresh okra sauce.</p>
+          <div class="menu-card__footer">
+            <span class="price">$25.00</span>
+            <button class="add-btn" onclick="addToCart('Tô with Gombo (Fresh Okra)', 25.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/to-gombo.png" alt="To with Gombo" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🫙</div>
+        </div>
+      </div>
+
+      <!-- ── SIDES ── -->
+      <div class="cat-label" data-cat-label="sides">Sides</div>
+
+      <div class="menu-card" data-cat="sides">
+        <div class="menu-card__body">
+          <div class="menu-card__badge menu-card__badge--green">✓ Great Price</div>
+          <h3>Riz Gras (Jollof Rice)</h3>
+          <p>Perfectly spiced West African jollof rice. 100% liked.</p>
+          <div class="menu-card__footer">
+            <span class="price">$13.00</span>
+            <button class="add-btn" onclick="addToCart('Riz Gras (Jollof Rice)', 13.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/rizgras.png" alt="Riz Gras" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🍚</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="sides">
+        <div class="menu-card__body">
+          <h3>Alloco (Plantain)</h3>
+          <p>Sweet fried plantains — crispy outside, soft inside.</p>
+          <div class="menu-card__footer">
+            <span class="price">$10.00</span>
+            <button class="add-btn" onclick="addToCart('Alloco (Plantain)', 10.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/alloco.png" alt="Alloco Plantain" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🍌</div>
+        </div>
+      </div>
+
+      <!-- ── DRINKS ── -->
+      <div class="cat-label" data-cat-label="drinks">Drinks</div>
+
+      <div class="menu-card" data-cat="drinks">
+        <div class="menu-card__body">
+          <h3>Ginger Juice</h3>
+          <p>House-made ginger brew — bold, natural, refreshing.</p>
+          <div class="menu-card__footer">
+            <span class="price">$7.00</span>
+            <button class="add-btn" onclick="addToCart('Ginger Juice', 7.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/ginger-juice.png" alt="Ginger Juice" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🥤</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="drinks">
+        <div class="menu-card__body">
+          <h3>Bissap Juice</h3>
+          <p>Hibiscus flower drink — sweet, tangy, and deeply West African.</p>
+          <div class="menu-card__footer">
+            <span class="price">$7.00</span>
+            <button class="add-btn" onclick="addToCart('Bissap Juice', 7.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/bissap-juice.png" alt="Bissap Juice" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🍹</div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-cat="drinks">
+        <div class="menu-card__body">
+          <h3>Deguêt</h3>
+          <p>Traditional West African fermented drink — rich and creamy.</p>
+          <div class="menu-card__footer">
+            <span class="price">$7.00</span>
+            <button class="add-btn" onclick="addToCart('Deguêt', 7.00, this)">+</button>
+          </div>
+        </div>
+        <div class="menu-card__img-wrap">
+          <img src="client/img/deguet.png" alt="Deguet" onerror="this.parentElement.classList.add('no-img')" />
+          <div class="img-placeholder">🥛</div>
+        </div>
+      </div>
+
+    </div><!-- /menu__grid -->
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section class="about" id="about">
+    <div class="container">
+      <h2 class="about__title">Locally Lived.<br/><span>Deeply Rooted.</span></h2>
+      <p class="about__body">Right here at 492 Clinton Ave in the heart of Newark — authentic West African flavors, every single day. Over 1,000 ratings and counting.</p>
+      <div class="about__contacts">
+        <a href="tel:9737323310" class="contact-pill">📞 (973) 732-3310</a>
+        <a href="https://maps.google.com/?q=492+Clinton+Ave+Newark+NJ" target="_blank" rel="noopener" class="contact-pill">📍 492 Clinton Ave</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__logo">BURKINDI</div>
+          <p>492 Clinton Ave<br/>Newark, NJ 07108</p>
+          <a href="tel:9737323310">(973) 732-3310</a>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="#menu">Menu</a>
+          <a href="#about">About</a>
+          <a href="tel:9737323310">Call Us</a>
+        </div>
+        <div>
+          <h4>Hours</h4>
+          <p>Open Daily<br/>Call to confirm</p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 Burkindi Restaurant · Newark, NJ</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── BOTTOM CART BAR (DoorDash-style sticky bar) ── -->
+  <div class="cart-bar" id="cartBar">
+    <button class="cart-bar__btn" onclick="openCart()">
+      <span class="cart-bar__count" id="cartBarCount">0</span>
+      <span class="cart-bar__label">View Order</span>
+      <span class="cart-bar__total" id="cartBarTotal">$0.00</span>
+    </button>
+  </div>
+
+  <!-- ── CART OVERLAY + DRAWER ── -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer__handle"></div>
+    <div class="cart-drawer__header">
+      <h3>Your Order</h3>
+      <button onclick="closeCart()" class="cart-close" aria-label="Close cart">✕</button>
+    </div>
+    <div class="cart-drawer__body" id="cartItems">
+      <div class="cart-empty">
+        <p>🛒</p>
+        <p>Your cart is empty</p>
+        <small>Add items from the menu above</small>
+      </div>
+    </div>
+    <div class="cart-drawer__footer" id="cartFooter" style="display:none">
+      <div class="cart-total">
+        <span>Subtotal</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <p class="cart-note">📍 Pickup · 492 Clinton Ave, Newark NJ</p>
+      <button class="btn btn--primary btn--full" onclick="placeOrder()">Place Pickup Order</button>
+    </div>
+  </div>
+
+  <!-- ── SUCCESS MODAL ── -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal">
+      <div class="modal__icon">🎉</div>
+      <h3>Order Received!</h3>
+      <p>Your pickup order is placed. We'll have it ready at:</p>
+      <strong>492 Clinton Ave, Newark NJ 07108</strong>
+      <p class="modal__phone">Questions? <a href="tel:9737323310">(973) 732-3310</a></p>
+      <button class="btn btn--primary btn--full" onclick="closeModal()">Got it!</button>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+imagefiles/
+imagefiles_extracted/
+.claude/
+*.zip
