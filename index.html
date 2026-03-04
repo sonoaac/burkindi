@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Burkindi Restaurant – Order Pickup</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/profile-checkout.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 </head>
@@ -20,6 +21,9 @@
       <nav class="header__nav">
         <a href="#about">About</a>
         <a href="tel:9737323310" class="header__call">📞 Call</a>
+        <button class="profile-btn" id="profileToggle" onclick="openProfile()" aria-label="Profile">
+          <span class="profile-btn__avatar">AJ</span>
+        </button>
       </nav>
     </div>
   </header>
@@ -552,7 +556,192 @@
         <span id="cartTotal">$0.00</span>
       </div>
       <p class="cart-note">📍 Pickup · 492 Clinton Ave, Newark NJ</p>
-      <button class="btn btn--primary btn--full" onclick="placeOrder()">Place Pickup Order</button>
+      <button class="btn btn--primary btn--full" onclick="openCheckout()">Checkout →</button>
+    </div>
+  </div>
+
+  <!-- ── SUCCESS MODAL ── -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal">
+      <div class="modal__icon">🎉</div>
+      <h3>Order Received!</h3>
+      <p>Your pickup order is placed. We'll have it ready at:</p>
+      <strong>492 Clinton Ave, Newark NJ 07108</strong>
+      <p class="modal__phone">Questions? <a href="tel:9737323310">(973) 732-3310</a></p>
+      <button class="btn btn--primary btn--full" onclick="closeModal()">Got it!</button>
+    </div>
+  </div>
+
+  <!-- ── PROFILE SHEET ── -->
+  <div class="sheet-overlay" id="profileOverlay" onclick="closeProfile()"></div>
+  <div class="profile-sheet" id="profileSheet">
+    <div class="sheet-handle"></div>
+
+    <div class="preview-banner">✦ Preview Mode — Profile &amp; Orders are not active</div>
+
+    <div class="profile-sheet__hero">
+      <div class="profile-avatar-lg">AJ</div>
+      <div class="profile-sheet__info">
+        <h3>Alex Johnson</h3>
+        <p>alex.j@email.com</p>
+        <span class="profile-since">Member since Jan 2024</span>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <div class="profile-section__label">Saved Address</div>
+      <div class="profile-row">
+        <span class="profile-row__icon">📍</span>
+        <div>
+          <div class="profile-row__main">145 Broadway Ave, Newark NJ</div>
+          <div class="profile-row__sub">Home · Default</div>
+        </div>
+        <span class="coming-tag">Coming Soon</span>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <div class="profile-section__label">Recent Orders</div>
+
+      <div class="order-card">
+        <div class="order-card__top">
+          <span class="order-card__name">Burkindi Restaurant</span>
+          <span class="order-card__status order-card__status--done">Completed</span>
+        </div>
+        <div class="order-card__items">Dibi with Riz Gras · Bissap Juice</div>
+        <div class="order-card__meta">Feb 18, 2026 · $44.00</div>
+        <button class="order-card__reorder" disabled>Reorder <span class="coming-tag">Coming Soon</span></button>
+      </div>
+
+      <div class="order-card">
+        <div class="order-card__top">
+          <span class="order-card__name">Burkindi Restaurant</span>
+          <span class="order-card__status order-card__status--done">Completed</span>
+        </div>
+        <div class="order-card__items">Poissons with Attieke · Alloco · Ginger Juice</div>
+        <div class="order-card__meta">Feb 10, 2026 · $52.00</div>
+        <button class="order-card__reorder" disabled>Reorder <span class="coming-tag">Coming Soon</span></button>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <div class="profile-row profile-row--btn" style="opacity:.5;pointer-events:none">
+        <span class="profile-row__icon">⚙️</span>
+        <div class="profile-row__main">Account Settings</div>
+        <span class="coming-tag">Coming Soon</span>
+      </div>
+      <div class="profile-row profile-row--btn" style="opacity:.5;pointer-events:none">
+        <span class="profile-row__icon">🔔</span>
+        <div class="profile-row__main">Notifications</div>
+        <span class="coming-tag">Coming Soon</span>
+      </div>
+    </div>
+
+    <button class="profile-close-btn" onclick="closeProfile()">Close</button>
+  </div>
+
+  <!-- ── CHECKOUT SHEET (3-step mock) ── -->
+  <div class="sheet-overlay" id="checkoutOverlay" onclick="closeCheckout()"></div>
+  <div class="checkout-sheet" id="checkoutSheet">
+    <div class="sheet-handle"></div>
+
+    <div class="preview-banner">✦ Preview Mode — Checkout is not active</div>
+
+    <!-- Step indicator -->
+    <div class="checkout-steps">
+      <div class="checkout-step active" id="cstep1">
+        <span class="step-num">1</span><span class="step-label">Review</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="checkout-step" id="cstep2">
+        <span class="step-num">2</span><span class="step-label">Your Info</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="checkout-step" id="cstep3">
+        <span class="step-num">3</span><span class="step-label">Payment</span>
+      </div>
+    </div>
+
+    <!-- STEP 1: Order Review -->
+    <div class="checkout-panel" id="panel1">
+      <h3 class="checkout-panel__title">Order Review</h3>
+      <div class="checkout-items" id="checkoutItems"></div>
+      <div class="checkout-summary">
+        <div class="summary-row"><span>Subtotal</span><span id="checkoutSubtotal">$0.00</span></div>
+        <div class="summary-row"><span>Pickup</span><span class="green-text">Free</span></div>
+        <div class="summary-row summary-row--total"><span>Total</span><span id="checkoutTotal">$0.00</span></div>
+      </div>
+      <button class="btn btn--primary btn--full" onclick="checkoutNext(2)">Continue to Info →</button>
+    </div>
+
+    <!-- STEP 2: Pickup Info (mock, disabled) -->
+    <div class="checkout-panel hidden" id="panel2">
+      <h3 class="checkout-panel__title">Pickup Info</h3>
+      <div class="mock-form">
+        <div class="mock-field">
+          <label>Full Name</label>
+          <input type="text" value="Alex Johnson" disabled />
+        </div>
+        <div class="mock-field">
+          <label>Phone</label>
+          <input type="tel" value="(973) 555-0142" disabled />
+        </div>
+        <div class="mock-field">
+          <label>Pickup Time</label>
+          <input type="text" value="ASAP · ~15 min" disabled />
+        </div>
+        <div class="mock-field">
+          <label>Pickup Location</label>
+          <input type="text" value="492 Clinton Ave, Newark NJ 07108" disabled />
+        </div>
+      </div>
+      <div class="checkout-nav">
+        <button class="btn-back" onclick="checkoutNext(1)">← Back</button>
+        <button class="btn btn--primary" onclick="checkoutNext(3)">Continue to Payment →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Payment (mock card, disabled) -->
+    <div class="checkout-panel hidden" id="panel3">
+      <h3 class="checkout-panel__title">Payment</h3>
+      <div class="mock-card-ui">
+        <div class="mock-card">
+          <div class="mock-card__chip">▣</div>
+          <div class="mock-card__number">•••• &nbsp;•••• &nbsp;•••• &nbsp;4242</div>
+          <div class="mock-card__row">
+            <div>
+              <div class="mock-card__label">CARD HOLDER</div>
+              <div class="mock-card__val">Alex Johnson</div>
+            </div>
+            <div>
+              <div class="mock-card__label">EXPIRES</div>
+              <div class="mock-card__val">12/26</div>
+            </div>
+          </div>
+          <div class="mock-card__network">VISA</div>
+        </div>
+        <div class="mock-form" style="margin-top:16px">
+          <div class="mock-field">
+            <label>Card Number</label>
+            <input type="text" value="•••• •••• •••• 4242" disabled />
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div class="mock-field">
+              <label>Expiry</label>
+              <input type="text" value="12/26" disabled />
+            </div>
+            <div class="mock-field">
+              <label>CVV</label>
+              <input type="text" value="•••" disabled />
+            </div>
+          </div>
+        </div>
+        <div class="preview-notice">🔒 Payment processing coming in Phase 2</div>
+      </div>
+      <div class="checkout-nav">
+        <button class="btn-back" onclick="checkoutNext(2)">← Back</button>
+        <button class="btn btn--primary" onclick="confirmOrder()">Confirm Order 🎉</button>
+      </div>
     </div>
   </div>
 
