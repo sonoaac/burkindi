@@ -116,7 +116,13 @@ function updateCartUI() {
   const totalQty = cart.reduce((s, i) => s + i.qty, 0);
   const subtotal  = cart.reduce((s, i) => s + i.price * i.qty, 0);
 
-  document.getElementById('cartCount').textContent = totalQty;
+  const cartBadge = document.getElementById('cartCount');
+  cartBadge.textContent = totalQty;
+  if (totalQty > 0) {
+    cartBadge.classList.add('has-items');
+  } else {
+    cartBadge.classList.remove('has-items');
+  }
 
   // Bottom cart bar
   const cartBar = document.getElementById('cartBar');

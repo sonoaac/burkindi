@@ -8,6 +8,8 @@
   --brand-dark:  #BF3407;
   --brand-light: #FFF3EE;
   --accent:      #F5A623;
+  --gold:        #C9A84C;
+  --gold-light:  #FBF4E0;
   --green:       #1E9E6B;
   --green-light: #E8F7F1;
   --dark:        #1A1108;
@@ -18,11 +20,13 @@
   --border:      #EBEBEB;
   --border-dark: #D9D3CD;
   --font-head:   'Syne', sans-serif;
+  --font-serif:  'Playfair Display', serif;
   --font-body:   'DM Sans', sans-serif;
   --ease:        cubic-bezier(0.4, 0, 0.2, 1);
   --header-h:    56px;
   --tabs-h:      52px;
   --cart-bar-h:  72px;
+  --max-w:       1100px;
 }
 
 /* ── Reset ── */
@@ -70,6 +74,36 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 .btn--full { width: 100%; }
 
 /* ============================================================
+   TOP INFO BAR — thin dark strip above header
+   ============================================================ */
+.top-bar {
+  background: var(--dark);
+  color: rgba(255,255,255,0.7);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 6px 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.top-bar::-webkit-scrollbar { display: none; }
+.top-bar__inner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  white-space: nowrap;
+}
+.top-bar__inner span { display: flex; align-items: center; gap: 5px; }
+.top-bar__inner a {
+  color: var(--gold);
+  font-weight: 700;
+  text-decoration: none;
+}
+.top-bar__divider { opacity: 0.3; }
+
+/* ============================================================
    HEADER — slim, blurred glass
    ============================================================ */
 .header {
@@ -88,7 +122,7 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   justify-content: space-between;
   height: 100%;
   padding: 0 16px;
-  max-width: 680px;
+  max-width: var(--max-w);
   margin: 0 auto;
 }
 .header__logo img {
@@ -109,7 +143,7 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   align-items: center;
   gap: 16px;
 }
-.header__nav a {
+.header__nav > a {
   font-family: var(--font-head);
   font-weight: 600;
   font-size: 0.88rem;
@@ -124,14 +158,58 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   font-weight: 700;
 }
 
+/* Cart icon in header */
+.cart-icon-btn {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--light);
+  border: 1.5px solid var(--border-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.cart-icon-btn:active { background: var(--border); }
+.cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--brand);
+  color: var(--white);
+  font-family: var(--font-head);
+  font-size: 0.62rem;
+  font-weight: 800;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--white);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.15s, transform 0.15s var(--ease);
+}
+.cart-badge.has-items {
+  opacity: 1;
+  transform: scale(1);
+}
+
 /* ============================================================
-   HERO BANNER — short restaurant photo, like DoorDash
+   HERO BANNER — cinematic, food background
    ============================================================ */
 .hero {
   position: relative;
-  height: 220px;
+  height: 260px;
   overflow: hidden;
   background: var(--dark-2);
+  background-image: url('client/img/dibi-rizgras.png');
+  background-size: cover;
+  background-position: center;
 }
 .hero__img-wrap {
   position: absolute;
@@ -148,9 +226,42 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(26,17,8,0.05) 0%,
-    rgba(26,17,8,0.55) 100%
+    rgba(26,17,8,0.15) 0%,
+    rgba(26,17,8,0.72) 100%
   );
+}
+.hero__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 20px 24px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.hero__tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+.hero__title {
+  font-family: var(--font-head);
+  font-size: clamp(1.6rem, 6vw, 2.8rem);
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.hero__sub {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.65);
+  font-weight: 400;
+  letter-spacing: 0.01em;
 }
 
 /* ============================================================
@@ -161,7 +272,7 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   border-bottom: 1px solid var(--border);
 }
 .resto-card__inner {
-  max-width: 680px;
+  max-width: var(--max-w);
   margin: 0 auto;
   padding: 16px 16px 14px;
 }
@@ -230,6 +341,34 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 }
 
 /* ============================================================
+   SECTION HEADINGS (serif)
+   ============================================================ */
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  font-weight: 700;
+  color: var(--dark);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+.section-title--light { color: var(--white); }
+.section-subtitle {
+  font-size: 0.88rem;
+  color: var(--mid);
+  margin-bottom: 28px;
+}
+.section-subtitle--light { color: rgba(255,255,255,0.55); }
+.gold-underline {
+  display: inline-block;
+  width: 48px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin-bottom: 14px;
+}
+
+/* ============================================================
    CATEGORY TABS — sticky, horizontally scrollable
    ============================================================ */
 .category-tabs {
@@ -284,12 +423,24 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 /* Category section labels */
 .cat-label {
   padding: 20px 16px 10px;
-  font-family: var(--font-head);
-  font-size: 1rem;
-  font-weight: 800;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
   color: var(--dark);
   letter-spacing: -0.01em;
   background: var(--light);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cat-label::after {
+  content: '';
+  display: block;
+  height: 2px;
+  flex: 1;
+  background: linear-gradient(to right, var(--gold), transparent);
+  border-radius: 1px;
+  opacity: 0.5;
 }
 
 /* ── MENU CARD — DoorDash style (content left, image right) ── */
@@ -401,10 +552,8 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 /* Image — right side */
 .menu-card__img-wrap {
   position: relative;
-  /* width/min-width set by grid column — no need to repeat */
   overflow: hidden;
   background: var(--brand-light);
-  /* Grid child: fills the full row height automatically */
 }
 .menu-card__img-wrap img {
   position: absolute;
@@ -424,27 +573,102 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
 .menu-card__img-wrap.no-img .img-placeholder { opacity: 1; }
 
 /* ============================================================
+   GALLERY
+   ============================================================ */
+.gallery {
+  background: var(--white);
+  padding: 48px 0 52px;
+  border-top: 1px solid var(--border);
+}
+.gallery .container { max-width: var(--max-w); }
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.gallery__item {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--light);
+  position: relative;
+}
+.gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s var(--ease);
+}
+.gallery__item:hover img { transform: scale(1.05); }
+.gallery__item--wide {
+  grid-column: span 2;
+  aspect-ratio: 2;
+}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.testimonials {
+  background: var(--dark-2);
+  padding: 52px 0 56px;
+}
+.testimonials .container { max-width: var(--max-w); }
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.testimonial-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 14px;
+  padding: 20px 20px 18px;
+}
+.testimonial-card__stars {
+  color: var(--gold);
+  font-size: 0.88rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+.testimonial-card p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+.testimonial-card__author {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
    ABOUT
    ============================================================ */
 .about {
-  background: var(--dark-2);
+  background: var(--dark);
   padding: 48px 0 52px;
 }
+.about .container { max-width: var(--max-w); }
 .about__title {
-  font-family: var(--font-head);
+  font-family: var(--font-serif);
   font-size: clamp(1.75rem, 7vw, 2.6rem);
-  font-weight: 800;
+  font-weight: 700;
   color: var(--white);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
   margin-bottom: 16px;
 }
-.about__title span { color: var(--accent); }
+.about__title span { color: var(--gold); }
 .about__body {
   font-size: 0.92rem;
   color: rgba(255,255,255,0.65);
   line-height: 1.7;
-  max-width: 480px;
+  max-width: 540px;
   margin-bottom: 24px;
 }
 .about__contacts {
@@ -458,23 +682,25 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   gap: 6px;
   padding: 11px 18px;
   border-radius: 10px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(201,168,76,0.3);
   color: var(--white);
   font-size: 0.88rem;
   font-weight: 600;
   transition: background 0.15s;
 }
-.contact-pill:active { background: rgba(255,255,255,0.18); }
+.contact-pill:active { background: rgba(255,255,255,0.14); }
 
 /* ============================================================
    FOOTER
    ============================================================ */
 .footer {
   background: var(--dark);
+  border-top: 1px solid rgba(255,255,255,0.06);
   color: rgba(255,255,255,0.5);
   padding: 36px 0 20px;
 }
+.footer .container { max-width: var(--max-w); }
 .footer__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -496,7 +722,7 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   color: rgba(255,255,255,0.45);
 }
 .footer a { color: rgba(255,255,255,0.6); }
-.footer a:hover { color: var(--accent); }
+.footer a:hover { color: var(--gold); }
 .footer h4 {
   font-family: var(--font-head);
   font-size: 0.7rem;
@@ -794,7 +1020,7 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
    TABLET+ (≥540px) — 2-col grid cards
    ============================================================ */
 @media (min-width: 540px) {
-  .hero { height: 280px; }
+  .hero { height: 320px; }
 
   .menu__grid {
     display: grid;
@@ -831,12 +1057,59 @@ button { cursor: pointer; border: none; background: none; font-family: var(--fon
   }
   .menu-card__footer { margin-top: 10px; }
 
+  .testimonials__grid { grid-template-columns: repeat(2, 1fr); }
+
   .footer__grid { grid-template-columns: 1.5fr 1fr 1fr; }
 
   .cart-bar { padding: 12px 24px; }
 }
 
 @media (min-width: 680px) {
-  .container { padding: 0 24px; }
+  .container { max-width: var(--max-w); padding: 0 24px; }
   .menu__grid { padding: 0 24px; }
+}
+
+/* ============================================================
+   DESKTOP (≥900px) — widen layout, 3-col menu grid
+   ============================================================ */
+@media (min-width: 900px) {
+  .hero { height: 420px; }
+
+  .header__inner { max-width: var(--max-w); }
+
+  .menu__grid {
+    max-width: var(--max-w);
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 32px;
+    column-gap: 16px;
+  }
+
+  .cat-label {
+    grid-column: 1 / -1;
+    font-size: 1.15rem;
+  }
+
+  .menu-card {
+    grid-template-rows: 180px auto;
+  }
+  .menu-card__img-wrap { height: 180px; }
+
+  .resto-card__inner { max-width: var(--max-w); padding: 20px 32px 18px; }
+
+  .gallery__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .testimonials__grid { grid-template-columns: repeat(3, 1fr); }
+
+  .category-tabs {
+    padding: 0 24px;
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+
+  .footer__grid { grid-template-columns: 2fr 1fr 1fr; }
+
+  .cart-bar__btn { max-width: calc(var(--max-w) - 64px); }
 }
